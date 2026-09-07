@@ -1,31 +1,64 @@
 const express = require('express');
-const mongoose = require('mongoose');
+require('dotenv').config();
+const { Pool } = require('pg');
 const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/sahrudaya';
+const DATABASE_URL = process.env.DATABASE_URL || process.env.NEON_DATABASE_URL || 'postgresql://postgres:postgres@127.0.0.1:5432/sahrudaya';
+
+// Show masked DB host/database for debugging (never print credentials)
+function mask(str) {
+  if (!str) return '';
+  if (str.length <= 6) return str.replace(/.(?=.{1})/g, '*');
+  return str.slice(0, 2) + '*'.repeat(Math.max(0, str.length - 4)) + str.slice(-2);
+}
+
+try {
+  let host = '';
+  let db = '';
+  try {
+    const u = new URL(DATABASE_URL);
+    host = u.hostname || '';
+    db = (u.pathname || '').replace(/^\//, '');
+  } catch (e) {
+    const m = DATABASE_URL.match(/@([^/]+)\/([^?]+)/);
+    if (m) {
+      host = m[1].split(':')[0];
+      db = m[2];
+    }
+  }
+  console.log('Using DB:', `${mask(host)}/${mask(db)}`);
+} catch (e) {
+  console.log('Using DB: (unable to parse connection string)');
+}
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname)));
 
-const contactSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true },
-  message: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now }
+// PostgreSQL (Neon) pool
+const pool = new Pool({
+  connectionString: DATABASE_URL,
+  ssl: DATABASE_URL.includes('neon') ? { rejectUnauthorized: false } : false,
 });
 
-const Contact = mongoose.model('Contact', contactSchema);
+async function initDB() {
+  // create contacts table if it doesn't exist
+  const createTableQuery = `
+    CREATE TABLE IF NOT EXISTS contacts (
+      id SERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
+      email TEXT NOT NULL,
+      message TEXT NOT NULL,
+      created_at TIMESTAMPTZ DEFAULT now()
+    );
+  `;
+  await pool.query(createTableQuery);
+  console.log('Postgres initialized / contacts table ready');
+}
 
-mongoose
-  .connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => console.log('MongoDB connected:', MONGODB_URI))
-  .catch((err) => console.error('MongoDB connection error:', err));
+initDB().catch((err) => console.error('Init DB error:', err));
 
 app.post('/api/contact', async (req, res) => {
   try {
@@ -39,10 +72,9 @@ app.post('/api/contact', async (req, res) => {
       return res.status(400).json({ status: 'error', message: 'Invalid captcha answer' });
     }
 
-    const contact = new Contact({ name, email, message });
-    await contact.save();
-
-    return res.json({ status: 'ok' });
+    const insertQuery = 'INSERT INTO contacts(name, email, message) VALUES($1, $2, $3) RETURNING id, created_at';
+    const result = await pool.query(insertQuery, [name, email, message]);
+    return res.json({ status: 'ok', id: result.rows[0].id });
   } catch (error) {
     console.error('Contact submit error:', error);
     return res.status(500).json({ status: 'error', message: 'Server error' });
@@ -51,8 +83,9 @@ app.post('/api/contact', async (req, res) => {
 
 app.get('/api/contacts', async (req, res) => {
   try {
-    const contacts = await Contact.find().sort({ createdAt: -1 });
-    return res.json(contacts);
+    const q = 'SELECT id, name, email, message, created_at FROM contacts ORDER BY created_at DESC';
+    const { rows } = await pool.query(q);
+    return res.json(rows);
   } catch (error) {
     console.error('Fetch contacts error:', error);
     return res.status(500).json({ status: 'error', message: 'Server error' });
