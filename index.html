@@ -7,28 +7,37 @@
   <meta name="theme-color" content="#0d1117" />
   <meta name="robots" content="index, follow" />
   <title>SAHRUDAYA</title>
+  <link rel="icon" type="image/jpeg" href="/SWAN_LOGO.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="site-header" id="site-header">
-    <div class="container header-inner">
+  <div class="masthead" id="site-header">
+    <div class="container masthead-inner">
       <a href="#home" class="logo logo-brand">
         <img src="SWAN_LOGO.jpg" alt="SAHRUDAYA logo" />
-        <span>SAHRUDAYA</span>
       </a>
-      <nav class="site-nav">
-        <a href="#home">Home</a>
-        <a href="#about">Who We Are</a>
-        <a href="#services">Our Services</a>
-        <a href="#images">Images</a>
-        <a href="#executive-board">Executive Board</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <header class="site-header">
+        <div class="header-inner">
+          <div class="header-identity">
+            <a href="#home" class="header-brand">SAHRUDAYA</a>
+            <small>Serving with heart</small>
+          </div>
+          <nav class="site-nav">
+            <a href="#home">Home</a>
+            <a href="#about">Who We Are</a>
+            <a href="#images">Moments of Service</a>
+            <a href="#services">Our Services</a>
+            <a href="#membership">Membership</a>
+            <a href="#executive-board">Executive Board</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        </div>
+      </header>
     </div>
-  </header>
+  </div>
 
   <main>
     <div id="home"></div>
@@ -61,6 +70,21 @@
       </div>
     </section>
 
+    <section id="images" class="section section-gallery fade-in">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-meta">Our Work</p>
+          <h2>Moments of service</h2>
+          <p>Real moments from the people and communities we are here to serve.</p>
+        </div>
+        <div class="gallery-grid">
+          <article class="glass-card gallery-card">
+            <div class="gallery-viewer" id="gallery-viewer"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="services" class="section fade-in">
       <div class="container">
         <div class="section-header">
@@ -84,6 +108,20 @@
       </div>
     </section>
 
+    <section id="membership" class="section fade-in">
+      <div class="container membership-wrap">
+        <div class="section-header membership-header">
+          <p class="section-meta">Membership</p>
+          <h2>Become a SAHRUDAYA member</h2>
+          <p>Join a growing network of people who believe in service, leadership, and positive community impact.</p>
+        </div>
+
+        <a class="membership-button" href="/member-login.html">
+          Login / Sign In
+        </a>
+      </div>
+    </section>
+
     <section id="executive-board" class="section fade-in">
       <div class="container">
         <div class="section-header">
@@ -92,35 +130,19 @@
         </div>
         <div class="board-list">
           <article class="glass-card">
-            <h3>Chairperson</h3>
-            
+            <h3>P.Chandramouleeswara Rao</h3>
+            <h5>President</h5>
             <p>Guiding our mission with vision, discipline, and corporate clarity.</p>
           </article>
           <article class="glass-card">
-            <h3>Secretary</h3>
+            <h3>A V Rama Kotaiah</h3>
+            <h5>Secretary</h5>
             <p>Delivering precise coordination across members, partnerships, and communications.</p>
           </article>
           <article class="glass-card">
-            <h3>Treasurer</h3>
+            <h3>G. Chiranjeevi</h3>
+            <h5>Treasurer</h5>
             <p>Maintaining financial transparency and responsible resource management.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="images" class="section fade-in">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-meta">Gallery</p>
-          <h2>Our visual highlights</h2>
-        </div>
-        <div class="gallery-grid">
-          <article class="glass-card gallery-card">
-            <div class="gallery-viewer" id="gallery-viewer"></div>
-            <div class="gallery-nav">
-              <button type="button" id="gallery-prev" class="gallery-button" disabled aria-label="Previous image">◀ Previous</button>
-              <button type="button" id="gallery-next" class="gallery-button" disabled aria-label="Next image">Next ▶</button>
-            </div>
           </article>
         </div>
       </div>
@@ -133,8 +155,10 @@
           <h2>Ready to collaborate?</h2>
           <p>Reach out for partnership opportunities, leadership inquiries, or to learn more about our programs.</p>
           <ul class="contact-list">
-            <li><strong>Email</strong> hello@sahrudaya.org</li>
-            <li><strong>Phone</strong> +91 12345 67890</li>
+            <li><strong>Email</strong> sahrudaya.wa@gmail.com</li>
+            <li><strong>Email</strong> swan@sahrudaya-wa.org</li>
+
+            <li><strong>Phone</strong> +91 9440331420</li>
             <li><strong>Location</strong> India</li>
           </ul>
           <div class="social-links">
@@ -178,12 +202,13 @@
         <p>Professional leadership and community service designed for modern organizations.</p>
       </div>
       <div>
-        <p><strong>Contact</strong></p>
-        <p>hello@sahrudaya.org</p>
-        <p>+91 12345 67890</p>
+        <p class="footer-heading">Contact</p>
+        <p>swan@sahrudaya-wa.org</p>
+        <p>sahrudaya.wa@gmail.com</p> 
+        <p>+91 9440331420</p>
       </div>
       <div>
-        <p><strong>Follow Us</strong></p>
+        <p class="footer-heading">Follow Us</p>
         <div class="social-links footer-social">
           <a href="#" aria-label="LinkedIn">in</a>
           <a href="#" aria-label="Twitter">tw</a>
@@ -195,14 +220,14 @@
 
   <script>
     document.documentElement.style.scrollBehavior = 'smooth';
-    const header = document.getElementById('site-header');
+    const masthead = document.getElementById('site-header');
     const sections = document.querySelectorAll('.fade-in');
 
     window.addEventListener('scroll', () => {
       if (window.scrollY > 20) {
-        header.classList.add('scrolled');
+        masthead.classList.add('scrolled');
       } else {
-        header.classList.remove('scrolled');
+        masthead.classList.remove('scrolled');
       }
     });
 
@@ -275,54 +300,58 @@
     });
 
     const galleryViewer = document.getElementById('gallery-viewer');
-    const galleryPrev = document.getElementById('gallery-prev');
-    const galleryNext = document.getElementById('gallery-next');
 
     let galleryImages = [];
-    let currentGalleryIndex = 0;
+    let gallerySignature = '';
 
-    function updateGalleryControls() {
-      const hasImages = galleryImages.length > 0;
-      galleryPrev.disabled = !hasImages || currentGalleryIndex <= 0;
-      galleryNext.disabled = !hasImages || currentGalleryIndex >= galleryImages.length - 1;
-    }
-
-    function renderGalleryImage() {
-      galleryViewer.innerHTML = '';
-
+    function renderGalleryTrack() {
       if (!galleryImages.length) {
+        galleryViewer.innerHTML = '';
         const emptyState = document.createElement('div');
         emptyState.className = 'gallery-empty-state';
         galleryViewer.appendChild(emptyState);
-        updateGalleryControls();
         return;
       }
 
-      const image = document.createElement('img');
-      image.className = 'gallery-image';
-      image.src = galleryImages[currentGalleryIndex];
-      image.alt = `Gallery image ${currentGalleryIndex + 1}`;
-      image.addEventListener('load', () => image.classList.add('visible'));
-      galleryViewer.appendChild(image);
+      const track = document.createElement('div');
+      track.className = 'gallery-track';
+      const flowingImages = [...galleryImages, ...galleryImages];
+      track.style.width = `${flowingImages.length * 100}%`;
 
-      updateGalleryControls();
+      flowingImages.forEach((imageUrl, index) => {
+        const image = document.createElement('img');
+        image.className = 'gallery-image';
+        image.style.width = `${100 / flowingImages.length}%`;
+        image.style.flexBasis = `${100 / flowingImages.length}%`;
+        image.src = imageUrl;
+        image.alt = `Gallery image ${(index % galleryImages.length) + 1}`;
+        track.appendChild(image);
+      });
+
+      galleryViewer.appendChild(track);
     }
 
-    galleryPrev.addEventListener('click', () => {
-      if (currentGalleryIndex > 0) {
-        currentGalleryIndex -= 1;
-        renderGalleryImage();
-      }
-    });
+    galleryViewer.addEventListener('mouseenter', () => galleryViewer.classList.add('gallery-paused'));
+    galleryViewer.addEventListener('mouseleave', () => galleryViewer.classList.remove('gallery-paused'));
 
-    galleryNext.addEventListener('click', () => {
-      if (currentGalleryIndex < galleryImages.length - 1) {
-        currentGalleryIndex += 1;
-        renderGalleryImage();
+    async function loadGalleryImages() {
+      try {
+        const response = await fetch('/api/images');
+        if (!response.ok) throw new Error('Unable to load gallery');
+        const images = await response.json();
+        const nextGalleryImages = images.map((image) => image.url);
+        const nextGallerySignature = nextGalleryImages.join('|');
+        if (nextGallerySignature === gallerySignature) return;
+        gallerySignature = nextGallerySignature;
+        galleryImages = nextGalleryImages;
+      } catch (error) {
+        console.error('Error loading gallery:', error);
       }
-    });
+      renderGalleryTrack();
+    }
 
-    renderGalleryImage();
+    loadGalleryImages();
+    window.setInterval(loadGalleryImages, 10000);
   </script>
 </body>
 </html>
