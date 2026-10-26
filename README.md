@@ -1,6 +1,6 @@
 # SAHRUDAYA – Professional Community Organization Website
 
-A modern, responsive community organization website built using **Node.js, Express.js, and MongoDB** to showcase SAHRUDAYA's mission, leadership, services, and community initiatives.
+A modern, responsive community organization website built using Node.js, Express.js, and Neon (PostgreSQL) to showcase SAHRUDAYA's mission, leadership, services, and community initiatives.
 
 ---
 
@@ -10,7 +10,7 @@ A modern, responsive community organization website built using **Node.js, Expre
 - Fully responsive design for desktop, tablet, and mobile
 - Home, Who We Are, Services, Gallery, Executive Board, and Contact sections
 - Contact form with arithmetic CAPTCHA verification
-- MongoDB integration for storing contact messages
+- Neon PostgreSQL database integration for storing contact messages securely
 - Gallery with Previous/Next navigation
 - Admin image upload and gallery management
 - Sticky navigation with smooth scrolling
@@ -30,8 +30,7 @@ A modern, responsive community organization website built using **Node.js, Expre
 - Express.js
 
 ### Database
-- MongoDB
-- Mongoose
+- Neon PostgreSQL (pg)
 
 ---
 
@@ -97,20 +96,18 @@ Open `http://localhost:3000/admin` to sign in. The admin dashboard and the `GET 
 
 After signing in, admins can upload JPEG, PNG, WebP, or GIF images up to 5 MB from the dashboard. Images are stored in the PostgreSQL `gallery_images` table and appear in the public gallery automatically.
 
-### 3. Start MongoDB
+### 3. Database Setup (Neon PostgreSQL)
 
-Ensure MongoDB is running locally.
+Ensure your Neon database is active online and configure your local environment variable.
 
-Default connection:
+Default environment variable setup in `.env`:
 
-```
-mongodb://127.0.0.1:27017/sahrudaya
-```
+DATABASE_URL=postgresql://user:password@ep-xxxx.us-east-2.aws.neon.tech/neondb?sslmode=require
 
 ### 4. Run the application
 
 ```bash
-node server.js
+npm start
 ```
 
 Open your browser and visit:
@@ -145,7 +142,7 @@ The contact section includes:
 - Subject
 - Message
 - Arithmetic CAPTCHA
-- MongoDB message storage
+- Neon PostgreSQL message storage
 
 ---
 
